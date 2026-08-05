@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-top: #eaf2fb;
+    --bg-bottom: #cfe0f5;
+    --panel: #ffffff;
+    --ink: #1c2b3a;
+    --ink-soft: #4b5c6e;
+    --accent: #2f6fb0;
+    --accent-deep: #204b78;
+    --line: #d7e3f0;
+    --nav-bg: #f5f9fd;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    padding: 100px 24px 70px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 600;
+  }
+
+  .hero-underline {
+    width: 90px;
+    height: 3px;
+    background: var(--accent);
+    margin: 22px auto 26px;
+    border-radius: 2px;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* TEAM STRIP */
+  .team-strip {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 36px;
+    padding: 0 24px 70px;
+  }
+
+  .strip-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 110px;
+  }
+
+  .strip-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    box-shadow: 0 12px 24px -12px rgba(32, 75, 120, 0.4);
+  }
+
+  .strip-member h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .strip-member span {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  /* NAV */
+  .nav-wrap {
+    background: var(--nav-bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  nav {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 18px 24px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--accent-deep);
+    border-color: var(--accent);
+  }
+
+  /* SECTIONS */
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 60px 24px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  section {
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 56px;
+    box-shadow: 0 20px 45px -20px rgba(32, 75, 120, 0.18);
+    position: relative;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  section p {
+    color: var(--ink-soft);
+    line-height: 1.75;
+    font-size: 1.02rem;
+    max-width: 720px;
+  }
+
+  section p + p { margin-top: 14px; }
+
+  /* TEAM GRID */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 26px;
+    margin-top: 30px;
+  }
+
+  .member {
+    text-align: center;
+    padding: 26px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .member:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px -16px rgba(32, 75, 120, 0.3);
+  }
+
+  .avatar {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .member h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .member span {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* PROJECT TILES (vertical layout, ranked) */
+  .project-tile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 30px;
+  }
+
+  .project-tile {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 30px 32px;
+    background: #fbfdff;
+  }
+
+  .project-tile h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .project-tile p {
+    font-size: 0.97rem;
+  }
+
+  .rank-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-deep);
+    background: #e3edf9;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 16px;
+  }
+
+  /* PROJECT / CARD LIST */
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px;
+    background: #fbfdff;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-deep);
+    background: #e3edf9;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 14px;
+  }
+
+  /* CONTACT */
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: var(--accent-deep); }
+
+  .btn-secondary {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px 60px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 34px 24px; }
+    nav { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Software Engineering Project</h1>
+    <div class="hero-underline"></div>
+    <p>Building a project for a real-life problem.</p>
+  </div>
+
+  <div class="team-strip">
+    <div class="strip-member">
+      <div class="strip-avatar">HS</div>
+      <h3>Hrideya Sharma</h3>
+      <span>1024030129</span>
+    </div>
+    <div class="strip-member">
+      <div class="strip-avatar">SS</div>
+      <h3>Shlok Shukla</h3>
+      <span>1024030131</span>
+    </div>
+    <div class="strip-member">
+      <div class="strip-avatar">JG</div>
+      <h3>Jatin Garg</h3>
+      <span>1024030132</span>
+    </div>
+    <div class="strip-member">
+      <div class="strip-avatar">HM</div>
+      <h3>Hiyaanshi Makkar</h3>
+      <span>1024030142</span>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <nav>
+      <a href="#about" class="active">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#status">Current Status</a>
+      <a href="#deliverables">Deliverables</a>
+      <a href="#skills">Skills</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <section id="about">
+      <span class="eyebrow">Section 01 · Overview</span>
+      <h2>About the Project</h2>
+      <p>[Project idea pending. Once finalised, replace this with the problem statement: who has the problem, where it occurs, and why it matters.]</p>
+    </section>
+
+    <section id="projects">
+      <span class="eyebrow">Section 02 · Work</span>
+      <h2>Projects</h2>
+      <p>Four project ideas under consideration, ranked from strongest to weakest choice. Rankings to be finalised.</p>
+      <div class="project-tile-list">
+        <div class="project-tile">
+          <h3>Low-Pollution Route Notifier</h3>
+          <p>A backend-focused app that notifies users in real time when pollution levels along their pre-defined travel routes are at their lowest. It breaks down pollution scores in 15-minute intervals using the previous week's data and forecasts conditions for upcoming days. The system includes a database for user profiles and routes, a data ingestion layer that fetches AQI, weather and traffic data on a schedule, a pollution score engine, background workers that recompute every 15 minutes, and a notification service across mobile, email and WhatsApp. Advanced features could include low-exposure alternative routes, traffic-adjusted pollution metrics, and specialised paths for joggers and cyclists.</p>
+          <span class="rank-tag">Rank: [to be added]</span>
+        </div>
+        <div class="project-tile">
+          <h3>Interview and Speaking Practice</h3>
+          <p>An AI-assisted tool for interview and speaking practice. Users are given interview questions or discussion topics and can respond by typing or speaking. The AI then detects logical fallacies in the response, summarizes the arguments made, scores the quality of evidence used, and keeps the discussion civil throughout. The goal is to help users sharpen how they argue, structure a response, and back up claims under real interview-style pressure.</p>
+          <span class="rank-tag">Rank: [to be added]</span>
+        </div>
+        <div class="project-tile">
+          <h3>Research Hub</h3>
+          <p>A collaborative research management platform that helps teams organize papers, experiments, tasks, meeting notes, and citations in one place. It combines AI-powered paper summarization, semantic search, experiment tracking, and project management to streamline the entire research workflow from literature review to final report. The aim is to reduce the overhead of juggling multiple disconnected tools during a research project and keep a team's work traceable from start to finish.</p>
+          <span class="rank-tag">Rank: [to be added]</span>
+        </div>
+        <div class="project-tile">
+          <h3>SmartMess (AI Hostel Mess Management)</h3>
+          <p>A management system for hostel mess operations, featuring live rush estimation, polls for proposed menu changes, and a notification or pin board for announcements from mess facilitators. The system consists of a student portal, an admin dashboard, an analytics module, a notification system, and a centralized database. Its effectiveness can be evaluated using metrics such as queue waiting time, student satisfaction surveys, and complaint resolution time, while key challenges include collecting sufficient data and encouraging active student participation.</p>
+          <span class="rank-tag">Rank: [to be added]</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="status">
+      <span class="eyebrow">Section 03 · Progress</span>
+      <h2>Current Status</h2>
+      <p>[Update this section as the project progresses. Note the current phase, what has been completed, and what is planned next.]</p>
+    </section>
+
+    <section id="deliverables">
+      <span class="eyebrow">Section 04 · Submissions</span>
+      <h2>Presentation Links and Deliverables</h2>
+      <p>Links to each presentation and deliverable will be added here as the semester progresses.</p>
+    </section>
+
+    <section id="skills">
+      <span class="eyebrow">Section 05 · Capabilities</span>
+      <h2>Skills &amp; Tools</h2>
+      <p>Technologies and areas you work with.</p>
+      <div class="card-list">
+        <div class="card"><h3>Skill Area</h3><p>Brief note on tools or techniques used here.</p></div>
+        <div class="card"><h3>Skill Area</h3><p>Brief note on tools or techniques used here.</p></div>
+        <div class="card"><h3>Skill Area</h3><p>Brief note on tools or techniques used here.</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Team Name. All rights reserved.
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('main section');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) current = sec.id;
+      });
+      links.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+
+</body>
+</html>
