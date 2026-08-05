@@ -86,17 +86,17 @@
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 12px;
+    overflow: hidden;
+    border: 3px solid #fff;
     box-shadow: 0 12px 24px -12px rgba(32, 75, 120, 0.4);
-  }
+}
+
+.strip-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
   .strip-member h3 {
     font-size: 0.95rem;
