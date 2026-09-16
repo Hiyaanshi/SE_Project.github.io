@@ -1,4 +1,59 @@
 /* =========================
+   ANIMATED CONTRIMAP LOGO
+========================= */
+
+const logo = document.getElementById("logo");
+
+const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+);
+
+if (!reduceMotion.matches && logo) {
+
+    let frame;
+
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    function onMove(event) {
+
+        const { clientX, clientY } = event;
+
+        targetX =
+            (clientX / window.innerWidth - 0.5) * 18;
+
+        targetY =
+            (clientY / window.innerHeight - 0.5) * 14;
+    }
+
+    function animate() {
+
+        currentX +=
+            (targetX - currentX) * 0.035;
+
+        currentY +=
+            (targetY - currentY) * 0.035;
+
+        logo.style.transform =
+            `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+        frame = requestAnimationFrame(animate);
+    }
+
+    window.addEventListener(
+        "pointermove",
+        onMove,
+        { passive: true }
+    );
+
+    frame = requestAnimationFrame(animate);
+}
+
+
+/* =========================
    NAVIGATION
 ========================= */
 
