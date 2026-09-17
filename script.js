@@ -1,46 +1,24 @@
-/* =========================
-   ANIMATED CONTRIMAP LOGO
-========================= */
+const polygon = document.getElementById("cursorPointer");
+const svg = polygon?.ownerSVGElement;
 
-const logo = document.getElementById("logo");
-
-const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-);
-
-if (!reduceMotion.matches && logo) {
-
-    let frame;
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
+if (polygon && svg) {
 
     function onMove(event) {
 
-        const { clientX, clientY } = event;
+        const rect = svg.getBoundingClientRect();
 
-        targetX =
-            (clientX / window.innerWidth - 0.5) * 18;
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-        targetY =
-            (clientY / window.innerHeight - 0.5) * 14;
-    }
+        const angle =
+            Math.atan2(
+                event.clientY - centerY,
+                event.clientX - centerX
+            ) * 180 / Math.PI + 90;
 
-    function animate() {
-
-        currentX +=
-            (targetX - currentX) * 0.035;
-
-        currentY +=
-            (targetY - currentY) * 0.035;
-
-        logo.style.transform =
-            `translate3d(${currentX}px, ${currentY}px, 0)`;
-
-        frame = requestAnimationFrame(animate);
+        polygon.style.transformOrigin = "50px 55px";
+        polygon.style.transform =
+            `rotate(${angle}deg)`;
     }
 
     window.addEventListener(
@@ -48,8 +26,6 @@ if (!reduceMotion.matches && logo) {
         onMove,
         { passive: true }
     );
-
-    frame = requestAnimationFrame(animate);
 }
 
 
