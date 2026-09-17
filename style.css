@@ -90,7 +90,7 @@ body {
 
     transform: translate(-50%, -50%);
 
-    animation: contrimap-logo-drift 90s linear infinite;
+    /* animation: contrimap-logo-drift 90s linear infinite; */
 
     will-change: transform;
 }
@@ -101,13 +101,24 @@ body {
 
     color: #8bd8ff;
     opacity: 0.13;
+    
+}
+#compassNeedle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: needle-rotate 100s linear infinite;
 }
 
-@keyframes contrimap-logo-drift {
+@keyframes needle-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
     to {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
+
 
 
 /* =========================
